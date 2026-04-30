@@ -1,0 +1,575 @@
+<!-- Your portfolio site HTML will be placed here for editing. -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>BotanyBot — FarmBot Project</title>
+    <link rel="stylesheet" href="styles.css" />
+    <style>
+@import url('https://fonts.googleapis.com/css2?family=Michroma&display=swap');
+        /* ===== COLOR PALETTE (UNCW Balanced) ===== */
+        :root {
+            /* UNCW Coastal Tech Palette */
+            --uncw-teal: #007A78;
+            --uncw-navy: #002B45;
+            --uncw-gold: #F2C94C;
+
+            /* Coastal Tech Accents */
+            --seafoam: #7FF5E7;
+            --reef-blue: #6CFF7F; /* neon green */ /* coastal cyan */
+            --deep-cyan: #00CC55; /* deeper neon green */ /* deep coastal cyan */
+
+            /* Glow */
+            --coastal-glow: 0 0 14px rgba(85, 214, 255, 0.45),
+                            0 0 28px rgba(0, 159, 183, 0.35),
+                            0 0 42px rgba(0, 159, 183, 0.18);
+
+            --bg-light: #f3f9fa;
+            --card-light: rgba(255,255,255,0.18);
+            --text-dark: #1f2d33;
+        }
+
+        /* ===== GLOBAL STYLES ===== */
+
+        /* ===== TOP NAV BAR (CUSTOM PERSONAL THEME) ===== */
+        .top-nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            padding: 12px 0;
+            background: rgba(0, 43, 69, 0.55); /* deep navy blend */
+            backdrop-filter: blur(14px) saturate(1.4);
+            border-bottom: 1px solid rgba(127, 245, 231, 0.35);
+            box-shadow: 0 4px 22px rgba(0,0,0,0.35);
+            z-index: 9999;
+        }
+        .nav-inner {
+            max-width: 1400px;
+            margin: auto;
+            padding: 0 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .nav-logo {
+            font-family: 'Michroma', sans-serif;
+            font-size: 1.3rem;
+            color: var(--uncw-teal); /* restore blue tone */
+            font-weight: 700;
+            letter-spacing: 1.5px;
+            text-shadow: none; /* remove green glow */
+            transition: 0.25s ease;
+        }
+        .nav-logo:hover {
+            color: var(--uncw-gold);
+            text-shadow: 0 0 10px var(--uncw-gold);
+            transform: translateY(-2px);
+        }
+        .nav-links {
+            display: flex;
+            gap: 36px;
+        }
+        .nav-links a {
+            font-size: 1.05rem;
+            font-weight: 600;
+            padding: 8px 14px;
+            border-radius: 10px;
+            color: var(--seafoam);
+            border: 1px solid rgba(127,245,231,0.25);
+            background: rgba(255,255,255,0.05);
+            backdrop-filter: blur(6px);
+            transition: 0.25s ease;
+            box-shadow: inset 0 0 6px rgba(0,0,0,0.2);
+        }
+        .nav-links a:hover {
+            color: var(--uncw-navy);
+            background: var(--reef-blue);
+            border-color: var(--deep-cyan);
+            box-shadow: 0 0 12px var(--reef-blue), inset 0 0 8px rgba(255,255,255,0.5);
+            transform: translateY(-3px);
+        }
+        .top-nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            padding: 10px 0; /* remove horizontal padding that pushed it off-screen */
+            backdrop-filter: blur(10px);
+            background: rgba(255,255,255,0.08);
+            border-bottom: 1px solid rgba(255,255,255,0.35);
+            z-index: 9999;
+        }
+        .nav-inner {
+            max-width: 1400px;
+            margin: auto;
+            padding: 0 40px; /* keep the content centered */
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .nav-logo {
+            font-family: 'Michroma', sans-serif;
+            font-size: 1.15rem;
+            color: var(--uncw-teal);
+            font-weight: 700;
+            letter-spacing: 1px;
+        }
+        .nav-links {
+            display: flex;
+            gap: 32px;
+        }
+        .nav-links a {
+            font-size: 1rem;
+            font-weight: 600;
+            color: var(--uncw-navy);
+            padding: 6px 10px;
+            border-radius: 6px;
+            transition: 0.25s ease;
+            border: 1px solid transparent;
+        }
+        .nav-links a:hover {
+            border-color: var(--reef-blue);
+            background: rgba(0,122,120,0.12);
+            box-shadow: 0 0 8px var(--reef-blue);
+        }
+
+
+        body {
+            margin: 0;
+            font-family: 'Inter', sans-serif;
+            background: var(--bg-light);
+            color: var(--text-dark);
+        }
+        h1, h2, h3 {
+            color: var(--uncw-navy);
+            margin: 0;
+        }
+        a {
+            text-decoration: none;
+        }
+
+        /* ===== HERO SECTION WITH VIDEO ===== */
+        .hero {
+            margin-top: 0; /* allow video to start under frosted nav */
+            position: relative;
+            height: 100vh;
+            width: 100%;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+        }
+        .hero video {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: -1;
+            
+        }
+        .overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to bottom, rgba(255,255,255,0.15), rgba(255,255,255,0.25)), rgba(0,0,0,0.55));
+            backdrop-filter: none;
+            z-index: -1;
+        }
+        .hero-content { display: none; }
+        .hero-content::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border-radius
+        }
+.hero-title {
+            font-size: 3rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            color: var(--uncw-teal);
+        }
+        .hero-subtitle {
+            font-size: 1.45rem;
+            font-weight: 700;
+            letter-spacing: 0.5px;
+            color: var(--uncw-gold);
+            
+            margin-bottom: 0.6rem;
+        }
+        .btn-group {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+        }
+        .btn {
+            padding: 12px 28px;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 1rem;
+            background: var(--uncw-teal);
+            color: white;
+            border: 2px solid var(--deep-cyan);
+            box-shadow: var(--coastal-glow);
+            transition: 0.25s ease;
+        }
+        .btn:hover {
+            background: var(--uncw-gold);
+            color: var(--uncw-navy);
+            transform: translateY(-3px) scale(1.05);
+            box-shadow: none;
+        }
+
+        /* ===== SECTION LAYOUT ===== */
+        section {
+            padding: 80px 10%;
+            background: var(--card-light);
+            border-radius: 12px;
+            margin: 40px auto;
+            box-shadow: 0 4px 14px rgba(0,0,0,0.08);
+        }
+        .section-title {
+            font-size: 2rem;
+            margin-bottom: 20px;
+            border-left: 6px solid var(--uncw-gold);  
+            padding-left: 12px;
+        }
+        .about-text {
+            max-width: 800px;
+            line-height: 1.7;
+            font-size: 1.1rem;
+        }
+
+        /* ===== FOOTER ===== */
+        footer {
+            text-align: center;
+            padding: 40px;
+            background: var(--uncw-navy);
+            color: white;
+            
+        }
+    @keyframes slowZoom {
+            from { transform: scale(1); }
+            to { transform: scale(1.08); }
+        }
+        .hero::after {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            box-shadow: inset 0 0 160px rgba(0,0,0,0.55), inset 0 0 45px rgba(0,0,0,0.35);
+        }
+    /* ===== RIBBON BAR ACROSS SCREEN ===== */
+        .hero-pane {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            padding: 30px 50px;
+
+            /* --- NEW ORGANIC FROST TEXTURE --- */
+            background: 
+                /* uneven frost patches */
+                radial-gradient(circle at 0% 0%, rgba(255,255,255,0.28) 0%, transparent 70%),
+                radial-gradient(circle at 100% 0%, rgba(255,255,255,0.26) 0%, transparent 72%),
+                radial-gradient(circle at 0% 100%, rgba(255,255,255,0.3) 0%, transparent 68%),
+                radial-gradient(circle at 100% 100%, rgba(255,255,255,0.32) 0%, transparent 70%),
+                radial-gradient(circle at 50% 0%, rgba(255,255,255,0.18) 0%, transparent 85%),
+                radial-gradient(circle at 0% 50%, rgba(255,255,255,0.18) 0%, transparent 85%),
+                radial-gradient(circle at 100% 50%, rgba(255,255,255,0.18) 0%, transparent 85%),
+                rgba(255,255,255,0.03);
+            
+            background-size: cover;
+            background-position: center;
+            backdrop-filter: blur(14px);
+            border-radius: 18px;
+            border: 1px solid rgba(255,255,255,0.45);
+            box-shadow: 0 4px 22px rgba(0,0,0,0.25);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 22px;
+            width: 750px;
+        }
+        .hero-name {
+    font-family: 'Michroma', sans-serif;
+    font-size: 3.2rem;
+    font-weight: 900;
+    letter-spacing: 1px;
+    position: relative;
+    display: inline-block;
+    padding: 6px 0;
+    color: var(--uncw-teal);
+
+    /* Minimal subtle green glow */
+    text-shadow:
+        0 0 1px var(--reef-blue),
+        0 0 3px var(--reef-blue),
+        0 0 5px var(--deep-cyan);
+}
+        .hero-menu {
+            display: flex;
+            gap: 30px;
+        }
+        .hero-link {
+            font-size: 1.15rem;
+            font-weight: 600;
+            padding: 12px 28px;
+            border-radius: 10px;
+            background: linear-gradient(180deg, rgba(31,174,74,0.32), rgba(0,122,120,0.22));
+            color: var(--uncw-navy);
+            border: 2px solid var(--reef-blue);
+            backdrop-filter: blur(8px);
+            box-shadow: 0 3px 6px rgba(0,0,0,0.35), 0 0 12px var(--deep-cyan), inset 0 0 6px rgba(255,255,255,0.25);
+            transition: 0.25s ease;
+            transform: translateY(0); /* baseline for 3D lift */
+        }
+        .hero-link:hover {
+            background: rgba(31,174,74,0.42);
+            color: white;
+            transform: translateY(-4px) scale(1.04);
+            box-shadow: 0 6px 14px rgba(0,0,0,0.45), 0 0 18px var(--reef-blue), inset 0 0 8px rgba(255,255,255,0.35);
+        }
+/* ===== CUSTOM PERSONAL FONT ===== */
+700&display=swap');
+
+/* ===== UPDATED HERO NAME WITH NEON LINE ===== */
+.hero-name {
+    font-family: 'Michroma', sans-serif;
+    font-size: 3.2rem;
+    font-weight: 700;
+    letter-spacing: 1px;
+    position: relative;
+    display: inline-block;
+    padding: 6px 0;
+    color: var(--uncw-teal);
+    
+}
+/* Neon line running through letters */
+
+.hero-circuit {
+    position: absolute;
+    top: 55%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 120%;
+    height: 60px;
+    z-index: -1;
+    filter: drop-shadow(0 0 6px var(--reef-blue)) drop-shadow(0 0 12px var(--deep-cyan));
+}
+/* ===== CIRCUIT ANIMATION ===== */
+.hero-circuit path {
+    stroke-dasharray: 180;
+    stroke-dashoffset: 180;
+    animation: circuitFlow 10s ease forwards;
+}
+
+@keyframes circuitFlow {
+    0% { stroke-dashoffset: 180; }
+    100% { stroke-dashoffset: 0; }
+}
+/* leaf grow animation (stagger-ready) */
+.leaf {
+    transform-origin: center;
+    animation: leafGrow 8s ease forwards;
+}
+
+/* === STAGGERED LEAF ANIMATION === */
+.leaf:nth-of-type(1) { animation-delay: 0s; }
+.leaf:nth-of-type(2) { animation-delay: 1s; }
+.leaf:nth-of-type(3) { animation-delay: 2s; }
+.leaf:nth-of-type(4) { animation-delay: 3s; }
+.leaf:nth-of-type(5) { animation-delay: 4s; }
+.leaf:nth-of-type(6) { animation-delay: 5s; }
+.leaf:nth-of-type(7) { animation-delay: 6s; }
+@keyframes leafGrow {
+    0%   { transform: scale(0);   opacity: 0; }
+    40%  { transform: scale(1.2); opacity: 1; }
+    70%  { transform: scale(1.0); opacity: 0.95; }
+}
+}
+}
+
+/* ===== WATER DROPLET OVERLAY ===== */
+.hero-pane::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: rgba(255,255,255,0.16);
+    backdrop-filter: blur(12px);
+    border-radius: inherit;
+    pointer-events: none;
+}@keyframes shimmer {
+    0% { opacity: 0.05; transform: translateY(0px) scale(1); }
+    50% { opacity: 0.09; transform: translateY(-6px) scale(1.01); }
+    100% { opacity: 0.05; transform: translateY(0px) scale(1); }
+}
+
+
+/* ==============================
+   RAIN ON FROSTED GLASS EFFECT
+============================== */
+
+20% { opacity: 0.9; }
+    100% { transform: translateY(260px) translateX(-3px); opacity: 0; }
+}
+
+50% { opacity: 0.28; }
+    100% { opacity: 0.15; }
+}
+
+
+
+</style>
+</head>
+<body>
+
+    <!-- ===== TOP NAVIGATION BAR ===== -->
+    <nav class="top-nav">
+        <div class="nav-inner">
+            <a href="/" class="nav-logo">Home</a>
+            <div class="nav-links">
+                <a href="#projects">Projects</a>
+                <a href="#about">About</a>
+                <a href="#contact">Contact</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- ===== HERO SECTION WITH VIDEO ===== -->
+<header class="hero">
+    <video autoplay muted loop playsinline>
+        <source src="Video1.mp4" type="video/mp4">
+    </video>
+    <div class="overlay"></div>
+
+    <div class="hero-pane">
+    <!-- Rain Animation Layer -->
+    <div class="rain-overlay">
+        <div class="rain-drop" style="left:10%; animation-delay:0s;"></div>
+        <div class="rain-drop" style="left:23%; animation-delay:0.4s;"></div>
+        <div class="rain-drop heavy" style="left:30%; animation-delay:1.2s;"></div>
+        <div class="rain-drop" style="left:45%; animation-delay:0.9s;"></div>
+        <div class="rain-drop" style="left:55%; animation-delay:1.6s;"></div>
+        <div class="rain-drop heavy" style="left:66%; animation-delay:0.2s;"></div>
+        <div class="rain-drop" style="left:72%; animation-delay:1.1s;"></div>
+        <div class="rain-drop" style="left:84%; animation-delay:0.7s;"></div>
+        <div class="rain-drop heavy" style="left:90%; animation-delay:1.4s;"></div>
+        <div class="frost-shine"></div>
+    </div>
+        <div class="hero-name">BotanyBot 
+            <svg class="hero-circuit" viewBox="0 0 600 60" preserveAspectRatio="none">
+                <!-- center bar (extended 25% each side) -->
+                <path d="M0 30 H600" stroke="url(#grad)" stroke-width="2" fill="none" />
+                <!-- left branch (extended) -->
+                <path d="M120 30 L90 30 L70 15 L40 15" stroke="url(#grad)" stroke-width="2" fill="none" />
+                <circle cx="40" cy="15" r="3" fill="#1FAE4A" />
+                <!-- right branch (extended) -->
+                <path d="M480 30 L510 30 L530 45 L560 45" stroke="url(#grad)" stroke-width="2" fill="none" />
+                <circle cx="560" cy="45" r="3" fill="var(--uncw-gold)" />
+                <!-- extra branches -->
+                <path d="M200 30 L200 12 L170 12" stroke="url(#grad)" stroke-width="2" fill="none" />
+                <circle cx="170" cy="12" r="3" fill="var(--uncw-gold)" />
+                <path d="M400 30 L400 48 L430 48" stroke="url(#grad)" stroke-width="2" fill="none" />
+                <circle cx="430" cy="48" r="3" fill="var(--uncw-gold)" />
+                <defs>
+                    <linearGradient id="grad" x1="0%" y1="0%" x2="100%" y2="0%">
+                        <stop offset="0%" stop-color="#1FAE4A" />
+                        <stop offset="100%" stop-color="#0A7A34" />
+                    </linearGradient>
+                    <linearGradient id="gradRoot" x1="0%" y1="0%" x2="100%" y2="0%">
+        <stop offset="0%" stop-color="#EEDFC5" />
+        <stop offset="100%" stop-color="#C9A774" />
+    </linearGradient>
+</defs>
+                <!-- far left extended branches (expanded) -->
+                <!-- added left leaf -->
+                <path class="leaf" d="M15 5 C20 2, 25 4, 27 8 C25 6, 20 7, 15 5 Z" fill="#1FAE4A" />
+                <path d="M40 15 L10 -5 L0 -5" stroke="url(#grad)" stroke-width="2" fill="none" />
+                <path d="M40 15 L5 40 L0 40" stroke="url(#grad)" stroke-width="2" fill="none" />
+                <path d="M40 15 L20 25 L0 25" stroke="url(#grad)" stroke-width="2" fill="none" />
+                <!-- mid-left micro branches -->
+                <path d="M90 0 L80 -10 L70 -10" stroke="url(#grad)" stroke-width="2" fill="none" />
+                <path d="M70 15 L60 25 L50 25" stroke="url(#grad)" stroke-width="2" fill="none" />
+                <!-- far right extended branches (expanded) -->
+                <path d="M560 45 L590 25 L600 25" stroke="url(#grad)" stroke-width="2" fill="none" />
+                <path d="M560 45 L590 70 L600 70" stroke="url(#gradRoot)" stroke-width="2" fill="none" />
+                <path d="M560 45 L585 55 L600 55" stroke="url(#gradRoot)" stroke-width="2" fill="none" />
+                <!-- mid-right micro branches -->
+                <path d="M520 45 L540 55 L550 55" stroke="url(#gradRoot)" stroke-width="2" fill="none" />
+                <path d="M520 45 L540 35 L550 35" stroke="url(#grad)" stroke-width="2" fill="none" />
+                <!-- leaf node -->
+                <circle cx="550" cy="35" r="3.2" fill="#1FAE4A" />
+                <!-- single animated leaf -->
+                <path class="leaf" d="M553 33 C558 30, 563 32, 565 36 C563 34, 558 35, 553 33 Z" fill="#1FAE4A" />
+                <!-- extra leaves -->
+                <path class="leaf" d="M430 48 C435 45, 440 47, 442 51 C440 49, 435 50, 430 48 Z" fill="#1FAE4A" />
+                <path class="leaf" d="M200 12 C205 9, 210 11, 212 15 C210 13, 205 14, 200 12 Z" fill="#1FAE4A" />
+                <path class="leaf" d="M70 15 C75 12, 80 14, 82 18 C80 16, 75 17, 70 15 Z" fill="#1FAE4A" />
+                <path class="leaf" d="M553 33 C558 30, 563 32, 565 36 C563 34, 558 35, 553 33 Z" fill="#1FAE4A" />
+                <!-- added branch variations -->
+                <path d="M120 15 L105 0 L90 0" stroke="url(#grad)" stroke-width="2" fill="none" />
+                <path d="M430 48 L445 60 L465 60" stroke="url(#grad)" stroke-width="2" fill="none" />
+            </svg></div>
+        <div class="hero-subtitle" style="-webkit-text-stroke: 0.35px rgba(255,220,90,0.95); text-shadow: 0 2px 4px rgba(0,0,0,0.35);">Autonomous Greenhouse Robotics</div>
+        <div class="hero-tagline" style="color: rgba(255,220,90,0.95); opacity: 0.98; font-size: 1.2rem; letter-spacing: 0.32px; margin-bottom: 2.6rem; text-shadow: 0 2px 4px rgba(0,0,0,0.35);">A ROS2‑Enhanced FarmBot Project</div>
+        <div class="hero-menu">
+            <a href="#projects" class="hero-link">BotanyBot Details</a>
+            <a href="#hardware" class="hero-link">Hardware</a>
+            <a href="#software" class="hero-link">Software</a>
+            <a href="#sensors" class="hero-link">Sensors</a>
+        </div>
+    </div>
+</header>
+
+    <!-- ===== PROJECTS SECTION ===== -->
+    <section id="projects">
+        <h2 class="section-title">FarmBot Project Overview</h2>
+        <p>something something something</p>
+    </section>
+
+    <!-- ===== HARDWARE SECTION ===== -->
+    <section id="hardware">
+        <h2 class="section-title">Hardware</h2>
+        <p></p>
+    </section>
+
+    <!-- ===== SOFTWARE SECTION ===== -->
+    <section id="software">
+        <h2 class="section-title">Software</h2>
+        <p></p>
+    </section>
+
+    <!-- ===== SENSORS SECTION ===== -->
+    <section id="sensors">
+        <h2 class="section-title">Sensors</h2>
+        <div class="about-text">
+            <p>The FarmBot platform integrates a growing suite of advanced sensors to monitor plant health, soil conditions, and overall greenhouse performance. Below are the primary sensor systems used in the BotanyBot project:</p>
+
+            <ul>
+                
+            </ul>
+
+            <p>More sensors will be added as the research expands, including spectral imaging modules and upward/downward reflective NDVI baselines.</p>
+        </div>
+    </section>
+
+    <!-- ===== FOOTER ===== -->
+    <footer>
+        © 2025 Stephen Marth — Portfolio
+    </footer>
+
+</body>
+</html>
